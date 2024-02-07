@@ -13,7 +13,9 @@ export class AppComponent implements OnInit {
   minutes: number = 0;
   seconds: number = 0;
 
-  constructor(private elRef: ElementRef) {}
+  countDownActive = true;
+
+  constructor(private elRef: ElementRef) { }
 
   ngOnInit() {
     this.startCountdown();
@@ -38,9 +40,6 @@ export class AppComponent implements OnInit {
     updateCountdown(); // Update once immediately to avoid initial delay
     const intervalId = setInterval(updateCountdown, 1000);
   }
-
-
-
 
   launchFireworks() {
     const fireworksOptions: FireworksOptions = {
@@ -83,10 +82,12 @@ export class AppComponent implements OnInit {
       lineStyle: 'round', // Style of the line ('round' or 'square')
       autoresize: true, // Automatically resize the fireworks container
     };
-    
+
+    this.countDownActive = false;
+
     const container = this.elRef.nativeElement.querySelector('.fireworks-container');
-  const fireworks = new Fireworks(container, fireworksOptions);
-  fireworks.start();
+    const fireworks = new Fireworks(container, fireworksOptions);
+    fireworks.start();
 
   }
 }

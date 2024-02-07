@@ -1,62 +1,161 @@
-
 .fireworks-container {
-    position: relative; /* This will be the relative container for the absolutely positioned canvas */
-    width: 100%; /* Fill the width of the viewport */
-    height: 100vh; /* Fill the height of the viewport */
-    background-color: black; /* Assuming you want a black background for fireworks */
-    overflow: hidden; /* Prevents any overflow from the canvas */
-  
-    .text-container {
-      position: absolute; /* Position it above the canvas */
-      top: 50%; /* Center vertically */
-      left: 50%; /* Center horizontally */
-      transform: translate(-50%, -50%); /* Adjust centering based on its size */
-      z-index: 2; /* Ensures the text is above the canvas */
-  
-      h1 {
-        color: white; /* Text color */
-        font-size: 4rem; /* Text size */
-      }
-      h1 {
-        margin-bottom: 30px; // Space above the countdown
-        color: #FFF; // White text for the title
-        text-align: center;
-        font-size: 5rem; // Large size for the title
-        font-family: 'Roboto Mono', monospace;
-      }
-  
-      .countdown-timer {
-        display: flex;
-        justify-content: center; // Center the timer horizontally
-        align-items: center; // Center the timer parts vertically
-        gap: 20px; // Space between timer parts
-  
-        .timer-part {
-          background: none; // No background to match the minimalistic style
-          color: #FFF; // White text for the timer
-          font-family: 'Roboto Mono', monospace; // Monospaced font similar to Google's
-          font-size: 4rem; // Large, bold font size for the timer
-          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); // Soft shadow for depth
-  
-          small {
-            display: block;
-            margin-top: -10px; // Adjust as needed
-            font-size: 1rem; // Smaller font size for labels
-            letter-spacing: 1px; // Spacing for aesthetic
-            text-transform: uppercase; // Uppercase for the labels
-            color: #AAAAAA; // Lighter color for the labels
-          }
+  position: relative;
+  z-index: 1;
+  /* This will be the relative container for the absolutely positioned canvas */
+  width: 100%;
+  /* Fill the width of the viewport */
+  height: 100vh;
+  /* Fill the height of the viewport */
+  background-color: black;
+  /* Assuming you want a black background for fireworks */
+  overflow: hidden;
+  /* Prevents any overflow from the canvas */
+
+  .text-container {
+    position: absolute;
+    /* Position it above the canvas */
+    top: 50%;
+    /* Center vertically */
+    left: 50%;
+    /* Center horizontally */
+    transform: translate(-50%, -50%);
+    /* Adjust centering based on its size */
+    z-index: 2;
+    /* Ensures the text is above the canvas */
+
+    h1 {
+      color: white;
+      /* Text color */
+      font-size: 4rem;
+      /* Text size */
+    }
+
+    h1 {
+      margin-bottom: 30px; // Space above the countdown
+      color: #FFF; // White text for the title
+      text-align: center;
+      font-size: 5rem; // Large size for the title
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .countdown-timer {
+      display: flex;
+      justify-content: center; // Center the timer horizontally
+      align-items: center; // Center the timer parts vertically
+      gap: 20px; // Space between timer parts
+
+      .timer-part {
+        background: none; // No background to match the minimalistic style
+        color: #FFF; // White text for the timer
+        font-family: 'Roboto Mono', monospace; // Monospaced font similar to Google's
+        font-size: 4rem; // Large, bold font size for the timer
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); // Soft shadow for depth
+
+        small {
+          display: block;
+          margin-top: -10px; // Adjust as needed
+          font-size: 1rem; // Smaller font size for labels
+          letter-spacing: 1px; // Spacing for aesthetic
+          text-transform: uppercase; // Uppercase for the labels
+          color: #AAAAAA; // Lighter color for the labels
         }
       }
     }
-  
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1; /* Ensure canvas is behind the text */
-    }
   }
-  
+
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Ensure canvas is behind the text */
+  }
+}
+
+.infinity-loader {
+  text-align: center;
+  z-index: -100;
+  margin: auto;
+  margin-top: 18em;
+}
+
+:root {
+  --hue: 223;
+  --bg: hsl(var(--hue), 90%, 95%);
+  --fg: hsl(var(--hue), 90%, 5%);
+  --trans-dur: 0.9s;
+  font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320));
+}
+
+.ip {
+  width: 32em;
+  height: 16em;
+}
+
+.ip__track {
+  stroke: hsl(var(--hue), 90%, 90%);
+  transition: stroke var(--trans-dur);
+}
+
+.ip__worm1,
+.ip__worm2 {
+  animation: worm1 2s linear infinite;
+}
+
+.ip__worm2 {
+  animation-name: worm2;
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: hsl(var(--hue), 90%, 5%);
+    --fg: hsl(var(--hue), 90%, 95%);
+  }
+
+  .ip__track {
+    stroke: hsl(var(--hue), 90%, 15%);
+  }
+}
+
+/* Animation */
+@keyframes worm1 {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    animation-timing-function: steps(1);
+    stroke-dashoffset: -358;
+  }
+
+  50.01% {
+    animation-timing-function: linear;
+    stroke-dashoffset: 358;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes worm2 {
+  from {
+    stroke-dashoffset: 358;
+  }
+
+  50% {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -358;
+  }
+}
+
+#partytime {
+  text-align: center;
+  color: hotpink;
+}
