@@ -7,7 +7,7 @@ import { Fireworks, FireworksOptions } from 'fireworks-js';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  countdownDate = new Date(Date.UTC(2024, 2, 1, 9, 15, 0)).getTime();
+  countdownDate = new Date(Date.UTC(2024, 2, 1, 8, 15, 0)).getTime();
   days: number = 0;
   hours: number = 0;
   minutes: number = 0;
