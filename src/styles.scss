@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%; /* Full height */
+    width: 100%; /* Full width */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    background-color: black; /* Set background color to black */
+    overflow: hidden; /* Hide the scrollbar if it's not needed */
+  }
+  
+  /* Make sure your app component takes full height as well */
+  app-root {
+    height: 100%;
+  }
+  
